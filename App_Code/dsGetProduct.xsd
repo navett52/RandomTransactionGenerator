@@ -8,7 +8,7 @@
         </Connections>
         <Tables />
         <Sources>
-          <DbSource ConnectionRef="GroceryStoreSimulator (Web.config)" DbObjectName="GroceryStoreSimulator.dbo.tProduct" DbObjectType="Table" GenerateShortCommands="true" GeneratorSourceName="ScalarQuery" MethodsParameterType="CLR" Modifier="Public" Name="ScalarQuery" QueryType="Scalar" ScalarCallRetval="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="ScalarQuery">
+          <DbSource ConnectionRef="GroceryStoreSimulator (Web.config)" DbObjectName="GroceryStoreSimulator.dbo.tProduct" DbObjectType="Table" GenerateShortCommands="true" GeneratorSourceName="GetRandomProductFromStore" MethodsParameterType="CLR" Modifier="Public" Name="GetRandomProductFromStore" QueryType="Scalar" ScalarCallRetval="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="GetRandomProductFromStore">
             <SelectCommand>
               <DbCommand CommandType="Text" ModifiedByUser="true">
                 <CommandText>SELECT        TOP (1) tProduct.ProductID, tProduct.Description
