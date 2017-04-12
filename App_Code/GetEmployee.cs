@@ -36,7 +36,7 @@ public class GetEmployee {
     private static SqlDataReader reader;
     private static SqlCommand comm;
 
-    public void OpenConnection(string connStrName) {
+    private void OpenConnection(string connStrName) {
         System.Configuration.ConnectionStringSettings strConn;
         strConn = ReadConnectionString(connStrName);
         conn = new SqlConnection(strConn.ConnectionString);
