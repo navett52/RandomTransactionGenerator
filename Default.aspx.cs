@@ -1,4 +1,18 @@
-﻿using System;
+﻿/*
+ * Group Project for IT3047
+ * Bill Nicholson
+ * nicholdw@ucmauil.uc.edu
+ * 
+ * /***********************************************************************************************************************************************************************************************
+ * Assignment 11
+ * Jake Reilman (reilmajb@mail.uc.edu) and Justin  (polleyaw@mail.uc.edu) Tom Martin ()
+ * IT3047C Web Server App Dev
+ * Class Project to build a website that generates a random transaction and adds it to the GroceryStore database.
+ * Due Date: 4/12/2017
+ *
+ **********************************************************************************************************************************************************************************************/
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -44,6 +58,6 @@ public partial class _Default : System.Web.UI.Page
 
     protected void btnAddTrans_Click(object sender, EventArgs e)
     {
-
+        AddTransaction();
     }
 }
