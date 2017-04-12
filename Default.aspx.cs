@@ -36,8 +36,10 @@ public partial class _Default : System.Web.UI.Page
 
     protected void btnGenerateTrans_Click(object sender, EventArgs e)
     {
-            storeID = getstore.RandomOpenStore();
-            emplID = getempl.RandomAvailableEmployee();
+        storeID = getstore.randomOpenStore();
+        emplID = getempl.RandomAvailableEmployee();
+        productID = getProduct.RandomProductAvailableAtStore(storeID);
+        couponID = getCoupon.RandomCurrentCouponForProduct(productID);
     }
 
     protected void btnAddTrans_Click(object sender, EventArgs e)
