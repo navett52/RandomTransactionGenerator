@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "RandomTransactionGenerator", ".", "{CFAB2CAA-B740-4C8C-8571-E752A935E9AB}"
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "RandomTransactionGenerator", ".", "{C881A58A-BD9E-4A6C-B9BE-3EB196619724}"
 	ProjectSection(WebsiteProperties) = preProject
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
 		Debug.AspNetCompiler.VirtualPath = "/localhost_17670"
@@ -29,8 +29,8 @@ Global
 		Debug|Any CPU = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{CFAB2CAA-B740-4C8C-8571-E752A935E9AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CFAB2CAA-B740-4C8C-8571-E752A935E9AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C881A58A-BD9E-4A6C-B9BE-3EB196619724}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C881A58A-BD9E-4A6C-B9BE-3EB196619724}.Debug|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
