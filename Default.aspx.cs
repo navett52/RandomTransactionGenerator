@@ -50,20 +50,20 @@ public partial class _Default : System.Web.UI.Page
         int qty = random.Next();
         SqlCommand cmd = new SqlCommand();
         cmd.CommandType = CommandType.StoredProcedure;
-        cmd.Parameters.Add(new SqlParameter("LoyaltyID", storeID));
-        cmd.Parameters.Add(new SqlParameter("DateOfTransaction", txtStoreNumber.Text.Trim()));
-        cmd.Parameters.Add(new SqlParameter("TimeOfTransaction", txtStoreNumber.Text.Trim()));
-        cmd.Parameters.Add(new SqlParameter("TransationTypeID", storeID));
-        cmd.Parameters.Add(new SqlParameter("StoreID", storeID));
-        cmd.Parameters.Add(new SqlParameter("EmplID", emplID));
-        cmd.Parameters.Add(new SqlParameter("Qty", ));
-        cmd.Parameters.Add(new SqlParameter("PricePerSellableUnitAsMarked", storeID));
-        cmd.Parameters.Add(new SqlParameter("PricePerSellableUnitToTheCustomer", storeID));
-        cmd.Parameters.Add(new SqlParameter("TransactionComment", storeID));
-        cmd.Parameters.Add(new SqlParameter("TransactionDetail", storeID));
-        cmd.Parameters.Add(new SqlParameter("CouponDetailID", storeID));
-        cmd.Parameters.Add(new SqlParameter("TransactionID", storeID));
-        cmd.CommandText = "AddTransactionAndDetail";
+        //cmd.Parameters.Add(new SqlParameter("LoyaltyID", storeID));
+        //cmd.Parameters.Add(new SqlParameter("DateOfTransaction", txtStoreNumber.Text.Trim()));
+        //cmd.Parameters.Add(new SqlParameter("TimeOfTransaction", txtStoreNumber.Text.Trim()));
+        //cmd.Parameters.Add(new SqlParameter("TransationTypeID", storeID));
+        //cmd.Parameters.Add(new SqlParameter("StoreID", storeID));
+        //cmd.Parameters.Add(new SqlParameter("EmplID", emplID));
+        //cmd.Parameters.Add(new SqlParameter("Qty", ));
+        //cmd.Parameters.Add(new SqlParameter("PricePerSellableUnitAsMarked", storeID));
+        //cmd.Parameters.Add(new SqlParameter("PricePerSellableUnitToTheCustomer", storeID));
+        //cmd.Parameters.Add(new SqlParameter("TransactionComment", storeID));
+        //cmd.Parameters.Add(new SqlParameter("TransactionDetail", storeID));
+        //cmd.Parameters.Add(new SqlParameter("CouponDetailID", storeID));
+        //cmd.Parameters.Add(new SqlParameter("TransactionID", storeID));
+        //cmd.CommandText = "AddTransactionAndDetail";
         cmd.ExecuteNonQuery();
     }
 
