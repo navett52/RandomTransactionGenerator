@@ -21,8 +21,8 @@ public class GetProduct
     public int RandomProductAvailableAtStore(int storeID)
     {
         dsGetProductTableAdapters.getRandomProductSoldAtGivenStore productAdapter = new dsGetProductTableAdapters.getRandomProductSoldAtGivenStore();
-        
+        productAdapter.GetRandomProductFromStore(storeID);
 
-        return 0;
+        return (int)productAdapter.GetRandomProductFromStore(storeID);
     }
 }
