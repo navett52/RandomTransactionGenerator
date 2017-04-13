@@ -32,6 +32,7 @@ public partial class _Default : System.Web.UI.Page
     GetCoupon getCoupon = new GetCoupon();
     protected void Page_Load(object sender, EventArgs e)
     {
+
         if (!IsPostBack)
         {
 
