@@ -35,6 +35,9 @@ public class GetCoupon
     public int RandomCurrentCouponForProduct(int productID)
     {
         int couponID = 0;
+        GetProduct product = new GetProduct();
+        GetStore store = new GetStore();
+        productID = product.RandomProductAvailableAtStore(store.randomOpenStore());
         comm = new SqlCommand("select top 1 cp.CouponID  from tCoupon cp join tCouponDetail cd on cp.CouponID = cd.CouponID where cd.ProductID = " + productID + " order by NEWID()", conn);
         try { reader.Close(); } catch (Exception ex) { }
         reader = comm.ExecuteReader();
