@@ -5,7 +5,7 @@
  * 
  * /***********************************************************************************************************************************************************************************************
  * Assignment 11
- * Jake Reilman (reilmajb@mail.uc.edu) and Justin  (polleyaw@mail.uc.edu) Tom Martin ()
+ * Jake Reilman (reilmajb@mail.uc.edu) and Justin Meyer (meyer3js@mail.uc.edu) Tom Martin (marti2t5@mail.uc.edu)
  * IT3047C Web Server App Dev
  * Class Project to build a website that generates a random transaction and adds it to the GroceryStore database.
  * Due Date: 4/12/2017
@@ -14,6 +14,8 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -21,6 +23,9 @@ using System.Web.UI.WebControls;
 
 public partial class _Default : System.Web.UI.Page
 {
+    private static System.Data.SqlClient.SqlConnection connection;
+    private static SqlCommand command;
+    private static SqlDataReader reader;
     int storeID;
     int emplID;
     int productID;
@@ -40,7 +45,25 @@ public partial class _Default : System.Web.UI.Page
 
     private void AddTransaction()
     {
-
+        Random random = new Random();
+        int qty = random.Next();
+        SqlCommand cmd = new SqlCommand();
+        cmd.CommandType = CommandType.StoredProcedure;
+        cmd.Parameters.Add(new SqlParameter("LoyaltyID", storeID));
+        cmd.Parameters.Add(new SqlParameter("DateOfTransaction", txtStoreNumber.Text.Trim()));
+        cmd.Parameters.Add(new SqlParameter("TimeOfTransaction", txtStoreNumber.Text.Trim()));
+        cmd.Parameters.Add(new SqlParameter("TransationTypeID", storeID));
+        cmd.Parameters.Add(new SqlParameter("StoreID", storeID));
+        cmd.Parameters.Add(new SqlParameter("EmplID", emplID));
+        cmd.Parameters.Add(new SqlParameter("Qty", ));
+        cmd.Parameters.Add(new SqlParameter("PricePerSellableUnitAsMarked", storeID));
+        cmd.Parameters.Add(new SqlParameter("PricePerSellableUnitToTheCustomer", storeID));
+        cmd.Parameters.Add(new SqlParameter("TransactionComment", storeID));
+        cmd.Parameters.Add(new SqlParameter("TransactionDetail", storeID));
+        cmd.Parameters.Add(new SqlParameter("CouponDetailID", storeID));
+        cmd.Parameters.Add(new SqlParameter("TransactionID", storeID));
+        cmd.CommandText = "AddTransactionAndDetail";
+        cmd.ExecuteNonQuery();
     }
 
     protected void calDate_SelectionChanged(object sender, EventArgs e)
@@ -59,5 +82,31 @@ public partial class _Default : System.Web.UI.Page
     protected void btnAddTrans_Click(object sender, EventArgs e)
     {
         AddTransaction();
+    }
+    private void openConnection()
+    {
+        try
+        {
+            // Creates a connection to the database that can be opened or closed by utilizing the connection string.
+            connection = new System.Data.SqlClient.SqlConnection(GetConnectionString("GroceryStoreSimulator").ConnectionString);
+            // Opens the connection to execute queries on the database.
+            connection.Open();
+        }
+        // Eats any exceptions.
+        catch (Exception ex)
+        {
+
+        }
+    }
+    // Defines the method to obtain the connection string from the web.config file.
+    private System.Configuration.ConnectionStringSettings GetConnectionString(string nameOfString)
+    {
+        String path;
+        // Establishes the path to the file.
+        path = "/Web.config";
+        // Obtains the connection string.
+        System.Configuration.Configuration webConfig = System.Web.Configuration.WebConfigurationManager.OpenWebConfiguration(path);
+        // Returns the connection string.
+        return webConfig.ConnectionStrings.ConnectionStrings[nameOfString];
     }
 }
