@@ -24,7 +24,7 @@ using System.Data.SqlClient;
 /// </summary>
 public class GetStore
 {
-    private static System.Data.SqlClient.SqlConnection connection;
+    private static SqlConnection connection;
     private static SqlCommand command;
     private static SqlDataReader reader;
 
@@ -82,7 +82,7 @@ public class GetStore
         try
         {
             // Creates a connection to the database that can be opened or closed by utilizing the connection string.
-            connection = new System.Data.SqlClient.SqlConnection(GetConnectionString("GroceryStoreSimulatorConnectionString").ConnectionString);
+            connection = new System.Data.SqlClient.SqlConnection(GetConnectionString("GroceryStoreSimulator").ConnectionString);
             // Opens the connection to execute queries on the database.
             connection.Open();
         }
