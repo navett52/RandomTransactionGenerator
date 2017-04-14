@@ -78,6 +78,14 @@ public partial class _Default : System.Web.UI.Page
         emplID = getempl.RandomAvailableEmployee();
         productID = getProduct.RandomProductAvailableAtStore(storeID);
         couponID = getCoupon.RandomCurrentCouponForProduct(productID);
+        //Get Quantity
+        //Get TransactionTypeID
+        //Get PricePerSellableUnitAsMarked
+        //Make PricePerSellableUnitToCustomer = PricePerSellableUnitAsMarked
+        //Make TransactionComment empty
+        //Make TransactionDetail empty
+        //Get CouponDetailID
+        //TransactionID is return value, should be able to keep empty
     }
 
     protected void btnAddTrans_Click(object sender, EventArgs e)
