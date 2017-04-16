@@ -15,6 +15,7 @@
 using dsCouponDetailTableAdapters;
 using dsLoyaltyTableAdapters;
 using dsPricePerSellableUnitAsMarkedTableAdapters;
+using dsTransactionTypeTableAdapters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -73,7 +74,10 @@ public class GetMiscValues
 
     public int GetRandomTransactionTypeID()
     {
-        return 0;
+        tTransactionTypeTableAdapter transactionTypeTableAdapter = new tTransactionTypeTableAdapter();
+        dsTransactionType.tTransactionTypeDataTable transactionTypeDataTable = transactionTypeTableAdapter.GetData();
+
+        return Convert.ToInt32(transactionTypeDataTable.Rows[0][0]);
     }
 
 
