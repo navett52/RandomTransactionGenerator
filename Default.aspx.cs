@@ -30,6 +30,11 @@ public partial class _Default : System.Web.UI.Page
     int emplID;
     int productID;
     int couponID;
+    int loyaltyID;
+    int transationType;
+    int qty;
+    int PricePerSellable;
+    int couponDetailID;
     string date = "";
     GetStore getstore = new GetStore();
     GetEmployee getempl = new GetEmployee();
@@ -46,22 +51,20 @@ public partial class _Default : System.Web.UI.Page
 
     private void AddTransaction()
     {
-        Random random = new Random();
-        int qty = random.Next();
         SqlCommand cmd = new SqlCommand();
         cmd.CommandType = CommandType.StoredProcedure;
-        //cmd.Parameters.Add(new SqlParameter("LoyaltyID", storeID));
-        //cmd.Parameters.Add(new SqlParameter("DateOfTransaction", txtStoreNumber.Text.Trim()));
+        cmd.Parameters.Add(new SqlParameter("LoyaltyID", loyaltyID));
+        cmd.Parameters.Add(new SqlParameter("DateOfTransaction", date));
         //cmd.Parameters.Add(new SqlParameter("TimeOfTransaction", txtStoreNumber.Text.Trim()));
-        //cmd.Parameters.Add(new SqlParameter("TransationTypeID", storeID));
-        //cmd.Parameters.Add(new SqlParameter("StoreID", storeID));
-        //cmd.Parameters.Add(new SqlParameter("EmplID", emplID));
-        //cmd.Parameters.Add(new SqlParameter("Qty", ));
-        //cmd.Parameters.Add(new SqlParameter("PricePerSellableUnitAsMarked", storeID));
-        //cmd.Parameters.Add(new SqlParameter("PricePerSellableUnitToTheCustomer", storeID));
-        //cmd.Parameters.Add(new SqlParameter("TransactionComment", storeID));
-        //cmd.Parameters.Add(new SqlParameter("TransactionDetail", storeID));
-        //cmd.Parameters.Add(new SqlParameter("CouponDetailID", storeID));
+        cmd.Parameters.Add(new SqlParameter("TransationTypeID", transationType));
+        cmd.Parameters.Add(new SqlParameter("StoreID", storeID));
+        cmd.Parameters.Add(new SqlParameter("EmplID", emplID));
+        cmd.Parameters.Add(new SqlParameter("Qty", qty));
+        cmd.Parameters.Add(new SqlParameter("PricePerSellableUnitAsMarked", PricePerSellable));
+        cmd.Parameters.Add(new SqlParameter("PricePerSellableUnitToTheCustomer", PricePerSellable));
+        cmd.Parameters.Add(new SqlParameter("TransactionComment", ""));
+        cmd.Parameters.Add(new SqlParameter("TransactionDetail", ""));
+        cmd.Parameters.Add(new SqlParameter("CouponDetailID", couponDetailID));
         //cmd.Parameters.Add(new SqlParameter("TransactionID", storeID));
         //cmd.CommandText = "AddTransactionAndDetail";
         cmd.ExecuteNonQuery();
@@ -74,17 +77,17 @@ public partial class _Default : System.Web.UI.Page
 
     protected void btnGenerateTrans_Click(object sender, EventArgs e)
     {
+        Random random = new Random();
+        GetMiscValues values = new GetMiscValues();
         storeID = getstore.randomOpenStore();
+        loyaltyID = values.GetRandomLoyaltyID(storeID);
+        transationType = values.GetRandomTransactionTypeID();
+        qty = random.Next(10000);       
         emplID = getempl.RandomAvailableEmployee();
         productID = getProduct.RandomProductAvailableAtStore(storeID);
         couponID = getCoupon.RandomCurrentCouponForProduct(productID);
-        //Get Quantity
-        //Get TransactionTypeID
-        //Get PricePerSellableUnitAsMarked
-        //Make PricePerSellableUnitToCustomer = PricePerSellableUnitAsMarked
-        //Make TransactionComment empty
-        //Make TransactionDetail empty
-        //Get CouponDetailID
+        PricePerSellable = values.GetPricePerSellableUnitAsMarked(storeID, productID);
+        couponDetailID = values.GetCouponDetailID(couponID);
         //TransactionID is return value, should be able to keep empty
     }
 
