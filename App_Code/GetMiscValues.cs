@@ -34,13 +34,12 @@ public class GetMiscValues
     }
     /// <summary>
     /// Gets a loyaltyID specific to a store
-    /// </summary>
-    /// <param name="storeID">The storeID that is passed to only get loyaltyID's attached to this store</param>
+    /// </summary
     /// <returns>Returns a random loyaltyID attached to the storeID passed</returns>
-    public int GetRandomLoyaltyID(int storeID)
+    public int GetRandomLoyaltyID()
     {
         tLoyaltyTableAdapter loyaltyTableAdapter = new tLoyaltyTableAdapter();
-        dsLoyalty.tLoyaltyDataTable loyaltyDataTable = loyaltyTableAdapter.GetData(storeID);
+        dsLoyalty.tLoyaltyDataTable loyaltyDataTable = loyaltyTableAdapter.GetData();
 
         return Convert.ToInt32(loyaltyDataTable.Rows[0][0]);
     }
