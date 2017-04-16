@@ -12,6 +12,7 @@
  *
  **********************************************************************************************************************************************************************************************/
 
+using dsCouponDetailTableAdapters;
 using dsLoyaltyTableAdapters;
 using dsPricePerSellableUnitAsMarkedTableAdapters;
 using System;
@@ -57,9 +58,17 @@ public class GetMiscValues
         return Convert.ToInt32(pricePerSellableUnitAsMarkedDataTable.Rows[0][0]);
     }
 
-    public int GetCouponDetailID(int couponID, int productID)
+    /// <summary>
+    /// Gets a couponDetailID specific to the coupon
+    /// </summary>
+    /// <param name="couponID">The couponID related to the couponDetailID</param>
+    /// <returns></returns>
+    public int GetCouponDetailID(int couponID)
     {
-        return 0;
+        tCouponDetailTableAdapter couponDetailTableAdapter = new tCouponDetailTableAdapter();
+        dsCouponDetail.tCouponDetailDataTable couponDetailDataTable = couponDetailTableAdapter.GetData(couponID);
+
+        return Convert.ToInt32(couponDetailDataTable.Rows[0][0]);
     }
 
     public int GetRandomTransactionTypeID()
