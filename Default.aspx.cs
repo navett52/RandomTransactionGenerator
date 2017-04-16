@@ -26,15 +26,6 @@ public partial class _Default : System.Web.UI.Page
     private static System.Data.SqlClient.SqlConnection connection;
     private static SqlCommand command;
     private static SqlDataReader reader;
-    int storeID;
-    int emplID;
-    int productID;
-    int couponID;
-    int loyaltyID;
-    int transationType;
-    int qty;
-    int PricePerSellable;
-    int couponDetailID;
     string date = "";
     GetStore getstore = new GetStore();
     GetEmployee getempl = new GetEmployee();
@@ -53,18 +44,18 @@ public partial class _Default : System.Web.UI.Page
     {
         SqlCommand cmd = new SqlCommand();
         cmd.CommandType = CommandType.StoredProcedure;
-        cmd.Parameters.Add(new SqlParameter("LoyaltyID", loyaltyID));
+        cmd.Parameters.Add(new SqlParameter("LoyaltyID", txtLoyaltyID.Text));
         cmd.Parameters.Add(new SqlParameter("DateOfTransaction", date));
         //cmd.Parameters.Add(new SqlParameter("TimeOfTransaction", txtStoreNumber.Text.Trim()));
-        cmd.Parameters.Add(new SqlParameter("TransationTypeID", transationType));
-        cmd.Parameters.Add(new SqlParameter("StoreID", storeID));
-        cmd.Parameters.Add(new SqlParameter("EmplID", emplID));
-        cmd.Parameters.Add(new SqlParameter("Qty", qty));
-        cmd.Parameters.Add(new SqlParameter("PricePerSellableUnitAsMarked", PricePerSellable));
-        cmd.Parameters.Add(new SqlParameter("PricePerSellableUnitToTheCustomer", PricePerSellable));
+        cmd.Parameters.Add(new SqlParameter("TransationTypeID", txtTransactionTypeID.Text));
+        cmd.Parameters.Add(new SqlParameter("StoreID", txtStoreID.Text));
+        cmd.Parameters.Add(new SqlParameter("EmplID", txtEmployeeID.Text));
+        cmd.Parameters.Add(new SqlParameter("Qty", txtQty.Text));
+        cmd.Parameters.Add(new SqlParameter("PricePerSellableUnitAsMarked", txtPricePerSellableUnitAsMarked.Text));
+        cmd.Parameters.Add(new SqlParameter("PricePerSellableUnitToTheCustomer", txtPricePerSellableUnitToCustomer.Text));
         cmd.Parameters.Add(new SqlParameter("TransactionComment", ""));
         cmd.Parameters.Add(new SqlParameter("TransactionDetail", ""));
-        cmd.Parameters.Add(new SqlParameter("CouponDetailID", couponDetailID));
+        cmd.Parameters.Add(new SqlParameter("CouponDetailID", txtCouponDetailID.Text));
         //cmd.Parameters.Add(new SqlParameter("TransactionID", storeID));
         //cmd.CommandText = "AddTransactionAndDetail";
         cmd.ExecuteNonQuery();
@@ -79,15 +70,16 @@ public partial class _Default : System.Web.UI.Page
     {
         Random random = new Random();
         GetMiscValues values = new GetMiscValues();
-        storeID = getstore.randomOpenStore();
-        loyaltyID = values.GetRandomLoyaltyID(storeID);
-        transationType = values.GetRandomTransactionTypeID();
-        qty = random.Next(10000);       
-        emplID = getempl.RandomAvailableEmployee();
-        productID = getProduct.RandomProductAvailableAtStore(storeID);
-        couponID = getCoupon.RandomCurrentCouponForProduct(productID);
-        PricePerSellable = values.GetPricePerSellableUnitAsMarked(storeID, productID);
-        couponDetailID = values.GetCouponDetailID(couponID);
+        txtStoreID.Text = Convert.ToString(getstore.randomOpenStore());
+        txtLoyaltyID.Text = Convert.ToString(values.GetRandomLoyaltyID(Convert.ToInt32(txtStoreID.Text)));
+        txtTransactionTypeID.Text = Convert.ToString(values.GetRandomTransactionTypeID());
+        txtQty.Text = Convert.ToString(random.Next(1, 10000));       
+        txtEmployeeID.Text = Convert.ToString(getempl.RandomAvailableEmployee());
+        txtProductID.Text = Convert.ToString(getProduct.RandomProductAvailableAtStore(Convert.ToInt32(txtStoreID.Text)));
+        txtCouponID.Text = Convert.ToString(getCoupon.RandomCurrentCouponForProduct(Convert.ToInt32(txtProductID.Text)));
+        txtPricePerSellableUnitAsMarked.Text = Convert.ToString(values.GetPricePerSellableUnitAsMarked(Convert.ToInt32(txtStoreID.Text), Convert.ToInt32(txtProductID.Text)));
+        txtPricePerSellableUnitToCustomer.Text = txtPricePerSellableUnitAsMarked.Text;
+        txtCouponDetailID.Text = Convert.ToString(values.GetCouponDetailID(Convert.ToInt32(txtCouponID.Text)));
         //TransactionID is return value, should be able to keep empty
     }
 
