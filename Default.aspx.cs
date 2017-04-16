@@ -71,7 +71,7 @@ public partial class _Default : System.Web.UI.Page
         Random random = new Random();
         GetMiscValues values = new GetMiscValues();
         txtStoreID.Text = Convert.ToString(getstore.randomOpenStore());
-        txtLoyaltyID.Text = Convert.ToString(values.GetRandomLoyaltyID();
+        txtLoyaltyID.Text = Convert.ToString(values.GetRandomLoyaltyID());
         txtTransactionTypeID.Text = Convert.ToString(values.GetRandomTransactionTypeID());
         txtQty.Text = Convert.ToString(random.Next(1, 10000));       
         txtEmployeeID.Text = Convert.ToString(getempl.RandomAvailableEmployee());
