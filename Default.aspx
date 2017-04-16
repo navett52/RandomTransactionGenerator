@@ -13,7 +13,7 @@
             <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
             <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                 <ContentTemplate>
-                    <asp:Calendar ID="calDate" runat="server" OnSelectionChanged="calDate_SelectionChanged"></asp:Calendar>
+                    <asp:Calendar ID="calDate" runat="server"></asp:Calendar><label id="calError" runat="server"></label>
                     <br />
                     <label>Please Enter a valid time in the format (HH:MM)</label>
                     <br />

@@ -65,10 +65,21 @@ public class GetMiscValues
     /// <returns></returns>
     public int GetCouponDetailID(int couponID)
     {
+        int returnValue;
         tCouponDetailTableAdapter couponDetailTableAdapter = new tCouponDetailTableAdapter();
         dsCouponDetail.tCouponDetailDataTable couponDetailDataTable = couponDetailTableAdapter.GetData(couponID);
 
-        return Convert.ToInt32(couponDetailDataTable.Rows[0][0]);
+
+        if (couponDetailDataTable.Rows.Count == 0) // If there are no records, then we set the coupon to 0.
+        {
+            returnValue = 0;
+        }
+        else
+        {
+            returnValue = Convert.ToInt32(couponDetailDataTable.Rows[0][0]);
+        }
+
+        return returnValue;
     }
 
     public int GetRandomTransactionTypeID()

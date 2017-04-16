@@ -33,6 +33,7 @@ public partial class _Default : System.Web.UI.Page
     GetCoupon getCoupon = new GetCoupon();
     protected void Page_Load(object sender, EventArgs e)
     {
+        calError.InnerText = "";
 
         if (!IsPostBack)
         {
@@ -42,38 +43,50 @@ public partial class _Default : System.Web.UI.Page
 
     private void AddTransaction()
     {
-        SqlCommand cmd = new SqlCommand();
-        cmd.CommandType = CommandType.StoredProcedure;
-        cmd.Parameters.Add(new SqlParameter("LoyaltyID", txtLoyaltyID.Text));
-        cmd.Parameters.Add(new SqlParameter("DateOfTransaction", date));
-        cmd.Parameters.Add(new SqlParameter("TimeOfTransaction", txtTimeOfTransaction.Text));
-        cmd.Parameters.Add(new SqlParameter("TransationTypeID", txtTransactionTypeID.Text));
-        cmd.Parameters.Add(new SqlParameter("StoreID", txtStoreID.Text));
-        cmd.Parameters.Add(new SqlParameter("EmplID", txtEmployeeID.Text));
-        cmd.Parameters.Add(new SqlParameter("Qty", txtQty.Text));
-        cmd.Parameters.Add(new SqlParameter("PricePerSellableUnitAsMarked", txtPricePerSellableUnitAsMarked.Text));
-        cmd.Parameters.Add(new SqlParameter("PricePerSellableUnitToTheCustomer", txtPricePerSellableUnitToCustomer.Text));
-        cmd.Parameters.Add(new SqlParameter("TransactionComment", ""));
-        cmd.Parameters.Add(new SqlParameter("TransactionDetail", ""));
-        cmd.Parameters.Add(new SqlParameter("CouponDetailID", txtCouponDetailID.Text));
-        cmd.Parameters.Add(new SqlParameter("TransactionID", ""));
-        cmd.CommandText = "AddTransactionAndDetail";
-        cmd.ExecuteNonQuery();
-    }
-
-    protected void calDate_SelectionChanged(object sender, EventArgs e)
-    {
-        date = calDate.ToString();
+        try
+        {
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add(new SqlParameter("LoyaltyID", txtLoyaltyID.Text));
+            cmd.Parameters.Add(new SqlParameter("DateOfTransaction", calDate.SelectedDate));
+            cmd.Parameters.Add(new SqlParameter("TimeOfTransaction", txtTimeOfTransaction.Text));
+            cmd.Parameters.Add(new SqlParameter("TransactionTypeID", txtTransactionTypeID.Text));
+            cmd.Parameters.Add(new SqlParameter("StoreID", txtStoreID.Text));
+            cmd.Parameters.Add(new SqlParameter("EmplID", txtEmployeeID.Text));
+            cmd.Parameters.Add(new SqlParameter("ProductID", txtProductID.Text));
+            cmd.Parameters.Add(new SqlParameter("Qty", txtQty.Text));
+            cmd.Parameters.Add(new SqlParameter("PricePerSellableUnitAsMarked", txtPricePerSellableUnitAsMarked.Text));
+            cmd.Parameters.Add(new SqlParameter("PricePerSellableUnitToTheCustomer", txtPricePerSellableUnitToCustomer.Text));
+            cmd.Parameters.Add(new SqlParameter("TransactionComment", ""));
+            cmd.Parameters.Add(new SqlParameter("TransactionDetailComment", ""));
+            cmd.Parameters.Add(new SqlParameter("couponDetailID", txtCouponDetailID.Text));
+            cmd.Parameters.Add(new SqlParameter("TransactionID", ""));
+            cmd.CommandText = "spAddTransactionAndDetail";
+            openConnection();
+            cmd.Connection = connection;
+            cmd.ExecuteNonQuery();
+            GenerateTransaction();
+        }
+        catch (Exception e)
+        {
+            calError.InnerText = e.Message;
+        }
+        
     }
 
     protected void btnGenerateTrans_Click(object sender, EventArgs e)
+    {
+        GenerateTransaction();
+    }
+
+    protected void GenerateTransaction()
     {
         Random random = new Random();
         GetMiscValues values = new GetMiscValues();
         txtStoreID.Text = Convert.ToString(getstore.randomOpenStore());
         txtLoyaltyID.Text = Convert.ToString(values.GetRandomLoyaltyID());
         txtTransactionTypeID.Text = Convert.ToString(values.GetRandomTransactionTypeID());
-        txtQty.Text = Convert.ToString(random.Next(1, 10000));       
+        txtQty.Text = Convert.ToString(random.Next(1, 10000));
         txtEmployeeID.Text = Convert.ToString(getempl.RandomAvailableEmployee());
         txtProductID.Text = Convert.ToString(getProduct.RandomProductAvailableAtStore(Convert.ToInt32(txtStoreID.Text)));
         txtCouponID.Text = Convert.ToString(getCoupon.RandomCurrentCouponForProduct(Convert.ToInt32(txtProductID.Text)));
