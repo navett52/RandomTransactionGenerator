@@ -8,13 +8,41 @@
 </head>
 <body>
     <form id="form1" runat="server">
-    <div>
-        <asp:Calendar ID="calDate" runat="server" OnSelectionChanged="calDate_SelectionChanged"></asp:Calendar>
-        <asp:TextBox ID="txtTime" runat="server"></asp:TextBox>
-        <br />
-        <asp:Button ID="btnGenerateTrans" runat="server" Text="Generate Transaction" OnClick="btnGenerateTrans_Click" />
-        <asp:Button ID="btnAddTrans" runat="server" Text="Add Transaction" OnClick="btnAddTrans_Click" />
-    </div>
+        <div>
+            <asp:RegularExpressionValidator ID="timeValRegex" runat="server" ControlToValidate="txtTimeOfTransaction" ErrorMessage="Please Enter a valid time in the format (HH:MM)" ValidationExpression="([0-1]?\d|2[0-3]):([0-5]?\d)(:([0-5]?\d))?"></asp:RegularExpressionValidator>
+            <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+            <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                <ContentTemplate>
+                    <asp:Calendar ID="calDate" runat="server" OnSelectionChanged="calDate_SelectionChanged"></asp:Calendar>
+                    <br />
+                    <label>Please Enter a valid time in the format (HH:MM)</label>
+                    <br />
+                    <label>Time of Transaction: </label><asp:TextBox runat="server" ID="txtTimeOfTransaction"></asp:TextBox><asp:RequiredFieldValidator ID="rfvTime" ControlToValidate="txtTimeOfTransaction" runat="server" ErrorMessage="*"></asp:RequiredFieldValidator>
+                    <br />
+                    <asp:Button ID="btnGenerateTrans" runat="server" Text="Generate Transaction" OnClick="btnGenerateTrans_Click" />
+                    <br />
+                    <label>StoreID: </label><asp:TextBox runat="server" ID="txtStoreID" ReadOnly="True"></asp:TextBox>
+                    <br />
+                    <label>EmployeeID: </label><asp:TextBox runat="server" ID="txtEmployeeID" ReadOnly="True"></asp:TextBox>
+                    <br />
+                    <label>ProductID: </label><asp:TextBox runat="server" ID="txtProductID" ReadOnly="True"></asp:TextBox>
+                    <br />
+                    <label>CouponID: </label><asp:TextBox runat="server" ID="txtCouponID" ReadOnly="True"></asp:TextBox>
+                    <br />
+                    <label>Qty: </label><asp:TextBox runat="server" ID="txtQty" ReadOnly="True"></asp:TextBox>
+                    <br />
+                    <label>TransactionTypeID: </label><asp:TextBox runat="server" ID="txtTransactionTypeID" ReadOnly="True"></asp:TextBox>
+                    <br />
+                    <label>PricePerSellableUnitAsMarked: </label><asp:TextBox runat="server" ID="txtPricePerSellableUnitAsMarked" ReadOnly="True"></asp:TextBox>
+                    <br />
+                    <label>PricePerSellableUnitToCustomer: </label><asp:TextBox runat="server" ID="txtPricePerSellableUnitToCustomer" ReadOnly="True"></asp:TextBox>
+                    <br />
+                    <label>CouponDetailID: </label><asp:TextBox runat="server" ID="txtCouponDetailID" ReadOnly="True"></asp:TextBox>
+                    <br />
+                    <asp:Button ID="btnAddTrans" runat="server" Text="Add Transaction" OnClick="btnAddTrans_Click" />
+                </ContentTemplate>
+            </asp:UpdatePanel>
+        </div>
     </form>
 </body>
 </html>
