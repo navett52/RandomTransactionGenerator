@@ -46,7 +46,7 @@ public partial class _Default : System.Web.UI.Page
         cmd.CommandType = CommandType.StoredProcedure;
         cmd.Parameters.Add(new SqlParameter("LoyaltyID", txtLoyaltyID.Text));
         cmd.Parameters.Add(new SqlParameter("DateOfTransaction", date));
-        //cmd.Parameters.Add(new SqlParameter("TimeOfTransaction", txtStoreNumber.Text.Trim()));
+        cmd.Parameters.Add(new SqlParameter("TimeOfTransaction", txtTimeOfTransaction.Text));
         cmd.Parameters.Add(new SqlParameter("TransationTypeID", txtTransactionTypeID.Text));
         cmd.Parameters.Add(new SqlParameter("StoreID", txtStoreID.Text));
         cmd.Parameters.Add(new SqlParameter("EmplID", txtEmployeeID.Text));
@@ -56,8 +56,8 @@ public partial class _Default : System.Web.UI.Page
         cmd.Parameters.Add(new SqlParameter("TransactionComment", ""));
         cmd.Parameters.Add(new SqlParameter("TransactionDetail", ""));
         cmd.Parameters.Add(new SqlParameter("CouponDetailID", txtCouponDetailID.Text));
-        //cmd.Parameters.Add(new SqlParameter("TransactionID", storeID));
-        //cmd.CommandText = "AddTransactionAndDetail";
+        cmd.Parameters.Add(new SqlParameter("TransactionID", ""));
+        cmd.CommandText = "AddTransactionAndDetail";
         cmd.ExecuteNonQuery();
     }
 
@@ -80,6 +80,7 @@ public partial class _Default : System.Web.UI.Page
         txtPricePerSellableUnitAsMarked.Text = Convert.ToString(values.GetPricePerSellableUnitAsMarked(Convert.ToInt32(txtStoreID.Text), Convert.ToInt32(txtProductID.Text)));
         txtPricePerSellableUnitToCustomer.Text = txtPricePerSellableUnitAsMarked.Text;
         txtCouponDetailID.Text = Convert.ToString(values.GetCouponDetailID(Convert.ToInt32(txtCouponID.Text)));
+        btnAddTrans.Enabled = true;
         //TransactionID is return value, should be able to keep empty
     }
 

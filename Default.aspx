@@ -63,7 +63,7 @@
                             <td><asp:TextBox runat="server" ID="txtCouponDetailID" ReadOnly="True"></asp:TextBox></td>
                         </tr>                     
                     </table>
-                    <asp:Button ID="btnAddTrans" runat="server" Text="Add Transaction" OnClick="btnAddTrans_Click" />
+                    <asp:Button ID="btnAddTrans" Enabled="false" runat="server" Text="Add Transaction" OnClick="btnAddTrans_Click" />
                 </ContentTemplate>
             </asp:UpdatePanel>
         </div>
