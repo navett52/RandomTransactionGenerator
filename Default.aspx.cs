@@ -77,6 +77,7 @@ public partial class _Default : System.Web.UI.Page
     protected void btnGenerateTrans_Click(object sender, EventArgs e)
     {
         GenerateTransaction();
+        lblAddedT.Visible = false;
     }
 
     protected void GenerateTransaction()
@@ -100,6 +101,7 @@ public partial class _Default : System.Web.UI.Page
     protected void btnAddTrans_Click(object sender, EventArgs e)
     {
         AddTransaction();
+        lblAddedT.Visible = true;
     }
     private void openConnection()
     {
